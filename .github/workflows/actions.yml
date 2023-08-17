@@ -1,16 +1,21 @@
-name: My Workflow
+name: Wait for Message
 
 on:
   workflow_dispatch:
     inputs:
       message:
-        description: 'The message to print'     
+        description: 'Message to Print'     
         required: true
         default: 'Hello, World!'
 
 jobs:
-  print:
+  trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Print the message
-        run: echo "${{ github.event.inputs.message }}"
+      - name: Trigger printing workflow
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: owner/repo
+          event-type: print-message
+          client-payload: '{"message": "${{ github.event.inputs.message }}"}'
