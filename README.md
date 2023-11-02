@@ -1,2 +1,2 @@
 # code
-Spatiu de lucru pentru PitacOs
+Spatiu pentru chestii
